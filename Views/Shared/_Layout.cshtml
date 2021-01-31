@@ -1,0 +1,88 @@
+﻿@using SNP
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <title>SNP</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="Common SNPs related to cancer landscape" name="description" />
+    <meta content="Lyra-Jr PCM & da Silva LD" name="author" />
+
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("styles", required: false)
+    <link href="~/Content/assets/plugins/dropzone/dropzone.css" rel="stylesheet" />
+    <!-- ================== BEGIN BASE JS ================== -->
+    @Scripts.Render("~/bundles/pace")
+    <!-- ================== END BASE JS ================== -->
+</head>
+<body>
+    <!-- begin #page-loader -->
+    <div id="page-loader" class="fade show">
+        <div class="material-loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
+            </svg>
+            <div class="message">Carregando...</div>
+        </div>
+    </div>
+    <!-- end #page-loader -->
+    <!-- begin #page-container -->
+    <div id="page-container" class="fade page-sidebar-fixed page-header-fixed page-with-wide-sidebar">
+        <!-- begin #header -->
+        <div id="header" class="header navbar-default">
+            @Html.Partial("_Header")
+        </div>
+        <!-- end #header -->
+        <!-- begin #sidebar -->
+        <div id="sidebar" class="sidebar" data-disable-slide-animation="true" style="background-color: #126535;">
+            <!-- begin sidebar scrollbar -->
+            @Html.Partial("_Navigation")
+            <!-- end sidebar scrollbar -->
+        </div>
+        <div class="sidebar-bg"></div>
+        <!-- end #sidebar -->
+        <!-- begin #content -->
+        <div id="content" class="content">
+            @RenderBody()
+        </div>
+        <!-- begin scroll to top btn -->
+        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="material-icons">keyboard_arrow_up</i></a>
+        <!-- end scroll to top btn -->
+    </div>
+    <!-- end page container -->
+    <!-- ================== BEGIN BASE JS ================== -->
+    @Scripts.Render("~/bundles/jquery")
+    <!--[if lt IE 9]>
+        <script src="../Content/assets/crossbrowserjs/html5shiv.js"></script>
+        <script src="../Content/assets/crossbrowserjs/respond.min.js"></script>
+        <script src="../Content/assets/crossbrowserjs/excanvas.min.js"></script>
+    <![endif]-->
+    @Scripts.Render("~/bundles/defaultApp")
+    <!-- ================== END BASE JS ================== -->
+    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    @Scripts.Render("~/bundles/misc")
+    @*@Scripts.Render("~/bundles/notificacao")*@
+    <!-- ================== END PAGE LEVEL JS ================== -->
+
+    <script>
+        $(document).ready(function(){
+        });
+    </script>
+
+    @RenderSection("scripts", required: false)
+    <script>
+        $(document).ready(function () {
+            App.init();
+        });
+    </script>
+</body>
+</html>

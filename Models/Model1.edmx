@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GENPsCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cancer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cancer_x_SNP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Cancer" Type="bigint" Nullable="false" />
+          <Property Name="ID_SNPS" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cancer_x_Subcategoria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_CANCER" Type="bigint" Nullable="false" />
+          <Property Name="ID_SUBCATEGORIA" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cor" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dado">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_SNP" Type="bigint" Nullable="false" />
+          <Property Name="ID_SUBCATEGORIA" Type="bigint" Nullable="false" />
+          <Property Name="Valor" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REL_Cancer_x_Subcategoria_x_SNP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_CANCER" Type="bigint" Nullable="false" />
+          <Property Name="ID_SUBCATEGORIA" Type="bigint" Nullable="false" />
+          <Property Name="ID_SNP" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REL_SNP_x_Subcategoria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_SNP" Type="bigint" Nullable="false" />
+          <Property Name="ID_SUBCATEGORIA" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SNPs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Localizacao" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cor" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Ordem" Type="int" Nullable="false" />
+          <Property Name="Mecanismo" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="TargetGene" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="ID_CANCER" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subcategoria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_CATEGORIA" Type="bigint" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GENPsC.dbo.vw_Categoria_x_SubCategoria' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_Categoria_x_SubCategoria">
+          <Key>
+            <PropertyRef Name="NomeCategoria" />
+            <PropertyRef Name="CorCategoria" />
+            <PropertyRef Name="ID_SUBCATEGORIA" />
+            <PropertyRef Name="NomeSubCategoria" />
+            <PropertyRef Name="ID_CATEGORIA" />
+          </Key>
+          <Property Name="NomeCategoria" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CorCategoria" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="ID_SUBCATEGORIA" Type="bigint" Nullable="false" />
+          <Property Name="NomeSubCategoria" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_CATEGORIA" Type="bigint" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GENPsC.dbo.vw_SNPs_x_Cancer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_SNPs_x_Cancer">
+          <Key>
+            <PropertyRef Name="ID_SNPs" />
+            <PropertyRef Name="NomeSNPs" />
+            <PropertyRef Name="LocalizacaoSNPs" />
+            <PropertyRef Name="CorSNPs" />
+            <PropertyRef Name="OrdemSNPs" />
+            <PropertyRef Name="MecanismoSNPs" />
+            <PropertyRef Name="TargetGeneSNPs" />
+            <PropertyRef Name="ID_CANCER" />
+            <PropertyRef Name="NomeCancer" />
+          </Key>
+          <Property Name="ID_SNPs" Type="bigint" Nullable="false" />
+          <Property Name="NomeSNPs" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LocalizacaoSNPs" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CorSNPs" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="OrdemSNPs" Type="int" Nullable="false" />
+          <Property Name="MecanismoSNPs" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="TargetGeneSNPs" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="ID_CANCER" Type="bigint" Nullable="false" />
+          <Property Name="NomeCancer" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="GENPsCModelStoreContainer">
+          <EntitySet Name="Cancer" EntityType="Self.Cancer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cancer_x_SNP" EntityType="Self.Cancer_x_SNP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cancer_x_Subcategoria" EntityType="Self.Cancer_x_Subcategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dado" EntityType="Self.Dado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REL_Cancer_x_Subcategoria_x_SNP" EntityType="Self.REL_Cancer_x_Subcategoria_x_SNP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REL_SNP_x_Subcategoria" EntityType="Self.REL_SNP_x_Subcategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SNPs" EntityType="Self.SNPs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subcategoria" EntityType="Self.Subcategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_Categoria_x_SubCategoria" EntityType="Self.vw_Categoria_x_SubCategoria" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_Categoria_x_SubCategoria].[NomeCategoria] AS [NomeCategoria], 
+    [vw_Categoria_x_SubCategoria].[CorCategoria] AS [CorCategoria], 
+    [vw_Categoria_x_SubCategoria].[ID_SUBCATEGORIA] AS [ID_SUBCATEGORIA], 
+    [vw_Categoria_x_SubCategoria].[NomeSubCategoria] AS [NomeSubCategoria], 
+    [vw_Categoria_x_SubCategoria].[ID_CATEGORIA] AS [ID_CATEGORIA]
+    FROM [dbo].[vw_Categoria_x_SubCategoria] AS [vw_Categoria_x_SubCategoria]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_SNPs_x_Cancer" EntityType="Self.vw_SNPs_x_Cancer" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_SNPs_x_Cancer].[ID_SNPs] AS [ID_SNPs], 
+    [vw_SNPs_x_Cancer].[NomeSNPs] AS [NomeSNPs], 
+    [vw_SNPs_x_Cancer].[LocalizacaoSNPs] AS [LocalizacaoSNPs], 
+    [vw_SNPs_x_Cancer].[CorSNPs] AS [CorSNPs], 
+    [vw_SNPs_x_Cancer].[OrdemSNPs] AS [OrdemSNPs], 
+    [vw_SNPs_x_Cancer].[MecanismoSNPs] AS [MecanismoSNPs], 
+    [vw_SNPs_x_Cancer].[TargetGeneSNPs] AS [TargetGeneSNPs], 
+    [vw_SNPs_x_Cancer].[ID_CANCER] AS [ID_CANCER], 
+    [vw_SNPs_x_Cancer].[NomeCancer] AS [NomeCancer]
+    FROM [dbo].[vw_SNPs_x_Cancer] AS [vw_SNPs_x_Cancer]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GENPsCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cancer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cancer_x_SNP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Cancer" Type="Int64" Nullable="false" />
+          <Property Name="ID_SNPS" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cancer_x_Subcategoria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CANCER" Type="Int64" Nullable="false" />
+          <Property Name="ID_SUBCATEGORIA" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cor" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dado">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_SNP" Type="Int64" Nullable="false" />
+          <Property Name="ID_SUBCATEGORIA" Type="Int64" Nullable="false" />
+          <Property Name="Valor" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REL_Cancer_x_Subcategoria_x_SNP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CANCER" Type="Int64" Nullable="false" />
+          <Property Name="ID_SUBCATEGORIA" Type="Int64" Nullable="false" />
+          <Property Name="ID_SNP" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REL_SNP_x_Subcategoria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_SNP" Type="Int64" Nullable="false" />
+          <Property Name="ID_SUBCATEGORIA" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SNPs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Localizacao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cor" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ordem" Type="Int32" Nullable="false" />
+          <Property Name="Mecanismo" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TargetGene" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_CANCER" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subcategoria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_CATEGORIA" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_Categoria_x_SubCategoria">
+          <Key>
+            <PropertyRef Name="NomeCategoria" />
+            <PropertyRef Name="CorCategoria" />
+            <PropertyRef Name="ID_SUBCATEGORIA" />
+            <PropertyRef Name="NomeSubCategoria" />
+            <PropertyRef Name="ID_CATEGORIA" />
+          </Key>
+          <Property Name="NomeCategoria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CorCategoria" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_SUBCATEGORIA" Type="Int64" Nullable="false" />
+          <Property Name="NomeSubCategoria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_CATEGORIA" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_SNPs_x_Cancer">
+          <Key>
+            <PropertyRef Name="ID_SNPs" />
+            <PropertyRef Name="NomeSNPs" />
+            <PropertyRef Name="LocalizacaoSNPs" />
+            <PropertyRef Name="CorSNPs" />
+            <PropertyRef Name="OrdemSNPs" />
+            <PropertyRef Name="MecanismoSNPs" />
+            <PropertyRef Name="TargetGeneSNPs" />
+            <PropertyRef Name="ID_CANCER" />
+            <PropertyRef Name="NomeCancer" />
+          </Key>
+          <Property Name="ID_SNPs" Type="Int64" Nullable="false" />
+          <Property Name="NomeSNPs" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LocalizacaoSNPs" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CorSNPs" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OrdemSNPs" Type="Int32" Nullable="false" />
+          <Property Name="MecanismoSNPs" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TargetGeneSNPs" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_CANCER" Type="Int64" Nullable="false" />
+          <Property Name="NomeCancer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="GENPsCEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cancer" EntityType="Self.Cancer" />
+          <EntitySet Name="Cancer_x_SNP" EntityType="Self.Cancer_x_SNP" />
+          <EntitySet Name="Cancer_x_Subcategoria" EntityType="Self.Cancer_x_Subcategoria" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="Dado" EntityType="Self.Dado" />
+          <EntitySet Name="REL_Cancer_x_Subcategoria_x_SNP" EntityType="Self.REL_Cancer_x_Subcategoria_x_SNP" />
+          <EntitySet Name="REL_SNP_x_Subcategoria" EntityType="Self.REL_SNP_x_Subcategoria" />
+          <EntitySet Name="SNPs" EntityType="Self.SNPs" />
+          <EntitySet Name="Subcategoria" EntityType="Self.Subcategoria" />
+          <EntitySet Name="vw_Categoria_x_SubCategoria" EntityType="Self.vw_Categoria_x_SubCategoria" />
+          <EntitySet Name="vw_SNPs_x_Cancer" EntityType="Self.vw_SNPs_x_Cancer" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GENPsCModelStoreContainer" CdmEntityContainer="GENPsCEntities1">
+          <EntitySetMapping Name="Cancer">
+            <EntityTypeMapping TypeName="GENPsCModel.Cancer">
+              <MappingFragment StoreEntitySet="Cancer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cancer_x_SNP">
+            <EntityTypeMapping TypeName="GENPsCModel.Cancer_x_SNP">
+              <MappingFragment StoreEntitySet="Cancer_x_SNP">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Cancer" ColumnName="ID_Cancer" />
+                <ScalarProperty Name="ID_SNPS" ColumnName="ID_SNPS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cancer_x_Subcategoria">
+            <EntityTypeMapping TypeName="GENPsCModel.Cancer_x_Subcategoria">
+              <MappingFragment StoreEntitySet="Cancer_x_Subcategoria">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_CANCER" ColumnName="ID_CANCER" />
+                <ScalarProperty Name="ID_SUBCATEGORIA" ColumnName="ID_SUBCATEGORIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="GENPsCModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Cor" ColumnName="Cor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dado">
+            <EntityTypeMapping TypeName="GENPsCModel.Dado">
+              <MappingFragment StoreEntitySet="Dado">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_SNP" ColumnName="ID_SNP" />
+                <ScalarProperty Name="ID_SUBCATEGORIA" ColumnName="ID_SUBCATEGORIA" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REL_Cancer_x_Subcategoria_x_SNP">
+            <EntityTypeMapping TypeName="GENPsCModel.REL_Cancer_x_Subcategoria_x_SNP">
+              <MappingFragment StoreEntitySet="REL_Cancer_x_Subcategoria_x_SNP">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_CANCER" ColumnName="ID_CANCER" />
+                <ScalarProperty Name="ID_SUBCATEGORIA" ColumnName="ID_SUBCATEGORIA" />
+                <ScalarProperty Name="ID_SNP" ColumnName="ID_SNP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REL_SNP_x_Subcategoria">
+            <EntityTypeMapping TypeName="GENPsCModel.REL_SNP_x_Subcategoria">
+              <MappingFragment StoreEntitySet="REL_SNP_x_Subcategoria">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_SNP" ColumnName="ID_SNP" />
+                <ScalarProperty Name="ID_SUBCATEGORIA" ColumnName="ID_SUBCATEGORIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SNPs">
+            <EntityTypeMapping TypeName="GENPsCModel.SNPs">
+              <MappingFragment StoreEntitySet="SNPs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Localizacao" ColumnName="Localizacao" />
+                <ScalarProperty Name="Cor" ColumnName="Cor" />
+                <ScalarProperty Name="Ordem" ColumnName="Ordem" />
+                <ScalarProperty Name="Mecanismo" ColumnName="Mecanismo" />
+                <ScalarProperty Name="TargetGene" ColumnName="TargetGene" />
+                <ScalarProperty Name="ID_CANCER" ColumnName="ID_CANCER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subcategoria">
+            <EntityTypeMapping TypeName="GENPsCModel.Subcategoria">
+              <MappingFragment StoreEntitySet="Subcategoria">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Categoria_x_SubCategoria">
+            <EntityTypeMapping TypeName="GENPsCModel.vw_Categoria_x_SubCategoria">
+              <MappingFragment StoreEntitySet="vw_Categoria_x_SubCategoria">
+                <ScalarProperty Name="NomeCategoria" ColumnName="NomeCategoria" />
+                <ScalarProperty Name="CorCategoria" ColumnName="CorCategoria" />
+                <ScalarProperty Name="ID_SUBCATEGORIA" ColumnName="ID_SUBCATEGORIA" />
+                <ScalarProperty Name="NomeSubCategoria" ColumnName="NomeSubCategoria" />
+                <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_SNPs_x_Cancer">
+            <EntityTypeMapping TypeName="GENPsCModel.vw_SNPs_x_Cancer">
+              <MappingFragment StoreEntitySet="vw_SNPs_x_Cancer">
+                <ScalarProperty Name="ID_SNPs" ColumnName="ID_SNPs" />
+                <ScalarProperty Name="NomeSNPs" ColumnName="NomeSNPs" />
+                <ScalarProperty Name="LocalizacaoSNPs" ColumnName="LocalizacaoSNPs" />
+                <ScalarProperty Name="CorSNPs" ColumnName="CorSNPs" />
+                <ScalarProperty Name="OrdemSNPs" ColumnName="OrdemSNPs" />
+                <ScalarProperty Name="MecanismoSNPs" ColumnName="MecanismoSNPs" />
+                <ScalarProperty Name="TargetGeneSNPs" ColumnName="TargetGeneSNPs" />
+                <ScalarProperty Name="ID_CANCER" ColumnName="ID_CANCER" />
+                <ScalarProperty Name="NomeCancer" ColumnName="NomeCancer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

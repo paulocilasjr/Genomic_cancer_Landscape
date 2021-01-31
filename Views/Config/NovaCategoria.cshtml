@@ -1,0 +1,78 @@
+﻿@model SNP.Models.Categoria
+@using SNP.Models
+
+@{
+    string item = "Categoria";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1 class="page-header">
+    @ViewBag.Title
+</h1>
+<!-- begin row -->
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="panel panel-inverse" data-sortable-id="form-validation-2">
+            <!-- begin panel-heading -->
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                </div>
+                <h4 class="panel-title">Criar Categoria</h4>
+            </div>
+            <!-- end panel-heading -->
+            <!-- begin panel-body -->
+            <div class="panel-body">
+                <form data-parsley-validate="true" action="@Url.Action("SalvarCategoria", "Config")">
+                    @* hidden fields *@
+                    <input name="id" value="@Model.ID" hidden />
+                    <div class="form-group row m-b-15">
+                        <label class="col-md-4 col-sm-4 col-form-label">Nome do(a) @item * :</label>
+                        <div class="col-md-8 col-sm-8">
+                            <input class="form-control" type="text" id="nome" name="nome" data-parsley-type="[3, 255]" placeholder="Nome do(a) @item" value="@Model.Nome" required="" />
+                        </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                        <label class="col-md-4 col-sm-4 col-form-label">Cor</label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <input class="form-control" name="cor" data-id="color-palette-1" value="@Model.Cor" />
+                                <div class="input-group-append">
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><div id="color-palette-1"></div></li>
+                                    </ul>
+                                    <a href="javascript:;" class="btn btn-grey text-black-lighter" data-toggle="dropdown"><i class="fa fa-tint fa-lg"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row m-b-0">
+                        <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
+                        <div class="col-md-8 col-sm-8">
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end panel-body -->
+        </div>
+    </div>
+    <!-- end col-10 -->
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/validacao")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/validacao")
+
+    <script>
+        $(document).ready(function () {
+            $('#color-palette-1').colorPalette().on('selectColor', function (e) {
+                $('[data-id="color-palette-1"]').val(e.color);
+            });
+        });
+    </script>
+}

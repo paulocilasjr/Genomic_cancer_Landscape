@@ -1,0 +1,75 @@
+﻿@model SNP.Models.Subcategoria
+@using SNP.Models
+
+@{
+    string item = "SubCategoria";
+    List<Categoria> lst_categorias = ViewBag.ListaCategorias;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1 class="page-header">
+    @ViewBag.Title
+</h1>
+<!-- begin row -->
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="panel panel-inverse" data-sortable-id="form-validation-2">
+            <!-- begin panel-heading -->
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                </div>
+                <h4 class="panel-title">Criar SubCategoria</h4>
+            </div>
+            <!-- end panel-heading -->
+            <!-- begin panel-body -->
+            <div class="panel-body">
+                <form data-parsley-validate="true" action="@Url.Action("SalvarSubCategoria", "Config")">
+                    @* hidden fields *@
+                    <input name="id" value="@Model.ID" hidden />
+                    <div class="form-group row m-b-15">
+                        <label class="col-md-4 col-sm-4 col-form-label">Nome do(a) @item * :</label>
+                        <div class="col-md-8 col-sm-8">
+                            <input class="form-control" type="text" id="nome" name="nome" data-parsley-type="[3, 255]" placeholder="Nome do(a) @item" value="@Model.Nome" required="" />
+                        </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                        <label class="col-md-4 col-sm-4 col-form-label">Nome do(a) Categoria * :</label>
+                        <div class="col-md-8 col-sm-8">
+                            <select class="form-control" id="ID_CATEGORIA" name="ID_CATEGORIA">
+                                @foreach (Categoria cat in lst_categorias)
+                                {
+                                   <option value="@cat.ID" @(cat.ID == Model.ID_CATEGORIA ? "selected" : "")>@cat.Nome</option> 
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row m-b-0">
+                        <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
+                        <div class="col-md-8 col-sm-8">
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end panel-body -->
+        </div>
+    </div>
+    <!-- end col-10 -->
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/validacao")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/validacao")
+
+    <script>
+        $(document).ready(function () {
+            $('#color-palette-1').colorPalette().on('selectColor', function (e) {
+                $('[data-id="color-palette-1"]').val(e.color);
+            });
+        });
+    </script>
+}

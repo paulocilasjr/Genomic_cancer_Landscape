@@ -1,0 +1,88 @@
+﻿@model SNP.Models.Cancer
+@using SNP.Models
+
+@{
+                /**/
+
+                string item = "Cancer";
+
+                Layout = "~/Views/Shared/_Layout.cshtml";
+                List<Cancer_x_Subcategoria> ListaCSCSelecionados = ViewBag.ListaCSCSelecionados;
+                List<vw_Categoria_x_SubCategoria> ListaCategoriasSubCategorias = ViewBag.ListaCategoriasSubCategorias;
+
+                List<Cancer_x_SNP> SNPSselecionados = ViewBag.ListaSNPSSelecionados;
+                List<SNPs> listaSNPs = ViewBag.ListaSNPS;
+                List<REL_Cancer_x_Subcategoria_x_SNP> ListSNPInfo = ViewBag.SNPInfo;
+                //para o pre render
+                List<long> lstSubPreRender = ListaCSCSelecionados.Select(x => x.ID_SUBCATEGORIA).Distinct().ToList();
+                List<vw_Categoria_x_SubCategoria> lstCatSubPreRender = ListaCategoriasSubCategorias.Where(x => lstSubPreRender.Contains(x.ID_SUBCATEGORIA)).ToList();
+
+                List<long> lstSNPSelecionadoPreRender = SNPSselecionados.Select(x => x.ID_SNPS).Distinct().ToList();
+                List<SNPs> lstSNPsPreRender = listaSNPs.Where(x => lstSNPSelecionadoPreRender.Contains(x.ID)).ToList();
+}
+
+@section Styles {
+}
+
+<style>
+    .vrt-header th span { 
+        writing-mode: vertical-lr; /* +90°: use 'tb-rl' */
+        text-align: center;          /* +90°: use 'right' */
+        padding:10px 5px 0; }
+    }
+</style>
+
+<h1 class="page-header">
+    @ViewBag.Title
+</h1>
+<!-- begin row -->
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="panel panel-inverse" data-sortable-id="form-validation-2">
+            <!-- begin panel-heading -->
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                </div>
+                <h4 class="panel-title">Landscape</h4>
+            </div>
+            <!-- end panel-heading -->
+            <!-- begin panel-body -->
+            <div class="panel-body">
+                <div class="panel-body ">
+                    <table class="vrt-header" style="font-size: 10px;">
+                        <tr>
+                                <th></th>
+                                <th></th>
+                                @foreach (var snp in lstSNPsPreRender)
+                                {
+                                    <th style="background-color: @snp.Cor;"><div><span>@snp.Nome<br />@snp.Localizacao</span></div></th>
+                                }
+                        </tr>
+                        <tbody>
+                            @foreach (var catsubcat in lstCatSubPreRender)
+                            {
+                                <tr>
+                                    
+                                    <td style="color: @catsubcat.CorCategoria">@catsubcat.NomeSubCategoria</td>
+                                    @for (int i = 0; i < lstSNPsPreRender.Count; i++)
+                                    {
+                                        <td style="@(ListSNPInfo.Where(x=> x.ID_SUBCATEGORIA == catsubcat.ID_SUBCATEGORIA && x.ID_SNP == lstSNPsPreRender[i].ID).Count() > 0 ? "Background-color: "+ catsubcat.CorCategoria: "")"></td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- end panel-body -->
+        </div>
+    </div>
+    <!-- end col-10 -->
+</div>
+
+
+@section Scripts {
+
+}

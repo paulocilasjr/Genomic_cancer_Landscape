@@ -1,0 +1,47 @@
+﻿<!-- begin sidebar scrollbar -->
+<div data-scrollbar="true" data-height="100%">
+    <!-- begin sidebar user -->
+    <ul class="nav">
+        <li class="nav-profile">
+            <a href="javascript:;" data-toggle="nav-profile">
+                <div class="cover with-shadow"></div>
+            </a>
+        </li>
+    </ul>
+    <!-- end sidebar user -->
+    <!-- begin sidebar nav -->
+    <ul class="nav">
+        <li class="nav-header">Navegation</li>
+        <li>
+            <a href="@Url.Action("Index","Home")">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index","Landscape")">
+                <i class="fas fa-tasks"></i>
+                <span>Landscape</span>
+            </a>
+        </li>
+        <li class="has-sub">
+            <a href="javascript:;">
+                <b class="caret"></b>
+                <i class="fa fa-table"></i>
+                <span>Configure</span>
+            </a>
+            <ul class="sub-menu">
+                <li><a href="@Url.Action("Cancer","Config")">Cancer</a></li>
+                <li><a href="@Url.Action("Categoria","Config")">Categories</a></li>
+                <li><a href="@Url.Action("SubCategoria","Config")">Subcategories</a></li>
+                <li><a href="@Url.Action("SNPs","Config")">SNPs</a></li>
+            </ul>
+        </li>
+
+        <!-- begin sidebar minify button -->
+        <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+        <!-- end sidebar minify button -->
+    </ul>
+    <!-- end sidebar nav -->
+</div>
+<!-- end sidebar scrollbar -->
